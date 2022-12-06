@@ -6635,19 +6635,7 @@ public class MainActivity extends AppCompatActivity {
     public int getSurahStart(int surahNumber) {
         return SSP[surahNumber];
     }
-    public int getSurahEnd(int surahNumber) {
-        return PSP[surahNumber];
-    }
-    public String[] GetData(int StartIndex, int EndIndex) {
-        List<String> listTemp = null;
 
-        for (int i = StartIndex; i < EndIndex; i++) {
-            listTemp.add(this.QuranArabicText[i].toString());
-        }
-        String[] list = listTemp.toArray(new String[]{});
-
-        return list;
-    }
     Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -6664,12 +6652,22 @@ public class MainActivity extends AppCompatActivity {
                     int i = Integer.valueOf(surah.getText().toString()) - 1;
                     int j = Integer.valueOf(ayat.getText().toString()) - 1;
 
-                    int totalVerses = getSurahVerses(i);
-                    int start = getSurahStart(i);
-                    int end = getSurahEnd(i);
-//                    String[] lst = GetData(start, end);
-                    String h = QuranArabicText[start+j].toString();
-                    t.setText(h);
+                    if (((i+1) < 1) || ((i+1) > 114)){
+                        t.setText("Invalid Input");
+                    }
+                    else
+                    {
+                        int totalVerses = getSurahVerses(i);
+                        if ((j+1) > totalVerses){
+                            t.setText("Invalid Input");
+                        }
+                        else{
+                            int start = getSurahStart(i);
+                            String h = QuranArabicText[start+j].toString();
+                            t.setText(h);
+                        }
+                    }
+
                 }
                 catch (Exception ex){
                     t.setText("Invalid Input!!!");
