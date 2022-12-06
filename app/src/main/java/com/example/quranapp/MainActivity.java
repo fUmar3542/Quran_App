@@ -3,10 +3,12 @@ package com.example.quranapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.Console;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -6633,11 +6635,14 @@ public class MainActivity extends AppCompatActivity {
     public int getSurahStart(int surahNumber) {
         return SSP[surahNumber];
     }
+    public int getSurahEnd(int surahNumber) {
+        return PSP[surahNumber];
+    }
     public String[] GetData(int StartIndex, int EndIndex) {
         List<String> listTemp = null;
 
         for (int i = StartIndex; i < EndIndex; i++) {
-            listTemp.add(QuranArabicText[i].toString());
+            listTemp.add(this.QuranArabicText[i]);
         }
         String[] list = listTemp.toArray(new String[]{});
 
@@ -6656,9 +6661,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    Integer i = Integer.parseInt(surah.getText().toString());
-                    Integer j = Integer.parseInt(ayat.getText().toString());
+                    int i = Integer.valueOf(surah.getText().toString()) - 1;
+                    int j = Integer.valueOf(ayat.getText().toString()) - 1;
 
+                    Integer totalVerses = getSurahVerses(i);
+                    Integer start = getSurahStart(i);
+                    Integer end = getSurahEnd(i);
+                    String[] lst = GetData(start, end);
+                    t.setText((String)lst[j]);
                 }
                 catch (Exception ex){
                     t.setText("Invalid Input!!!");
