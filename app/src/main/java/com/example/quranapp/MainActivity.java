@@ -6642,7 +6642,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> listTemp = null;
 
         for (int i = StartIndex; i < EndIndex; i++) {
-            listTemp.add(this.QuranArabicText[i]);
+            listTemp.add(this.QuranArabicText[i].toString());
         }
         String[] list = listTemp.toArray(new String[]{});
 
@@ -6664,11 +6664,12 @@ public class MainActivity extends AppCompatActivity {
                     int i = Integer.valueOf(surah.getText().toString()) - 1;
                     int j = Integer.valueOf(ayat.getText().toString()) - 1;
 
-                    Integer totalVerses = getSurahVerses(i);
-                    Integer start = getSurahStart(i);
-                    Integer end = getSurahEnd(i);
-                    String[] lst = GetData(start, end);
-                    t.setText((String)lst[j]);
+                    int totalVerses = getSurahVerses(i);
+                    int start = getSurahStart(i);
+                    int end = getSurahEnd(i);
+//                    String[] lst = GetData(start, end);
+                    String h = QuranArabicText[start+j].toString();
+                    t.setText(h);
                 }
                 catch (Exception ex){
                     t.setText("Invalid Input!!!");
