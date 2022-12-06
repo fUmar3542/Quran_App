@@ -6659,7 +6659,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         int totalVerses = getSurahVerses(i);
                         if ((j+1) > totalVerses){
-                            t.setText("Invalid Input");
+                            t.setText("Invalid Input!!!");
                         }
                         else{
                             int start = getSurahStart(i);
