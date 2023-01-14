@@ -7,9 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
+import android.text.method.ScrollingMovementMethod;
 import java.io.Console;
 import java.util.List;
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.Intent;
+import android.net.Uri;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -6640,6 +6645,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         setContentView(R.layout.activity_main);
         btn= (Button)findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener(){
@@ -6649,6 +6655,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    t.setMovementMethod(new ScrollingMovementMethod());
                     int i = Integer.valueOf(surah.getText().toString()) - 1;
                     int j = Integer.valueOf(ayat.getText().toString()) - 1;
 
@@ -6675,6 +6682,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Button repo = findViewById(R.id.repository);
+        repo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = "https://github.com/fUmar3542/Quran_App/commits/main";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
     }
 
 
