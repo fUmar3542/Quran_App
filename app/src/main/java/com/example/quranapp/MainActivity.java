@@ -2,6 +2,7 @@ package com.example.quranapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -6641,11 +6642,16 @@ public class MainActivity extends AppCompatActivity {
         return SSP[surahNumber];
     }
 
+
     Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        /*if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_main2);
+        } else {
+            setContentView(R.layout.activity_main);
+        }*/
         setContentView(R.layout.activity_main);
         btn= (Button)findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener(){
@@ -6655,7 +6661,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    t.setMovementMethod(new ScrollingMovementMethod());
                     int i = Integer.valueOf(surah.getText().toString()) - 1;
                     int j = Integer.valueOf(ayat.getText().toString()) - 1;
 
@@ -6674,12 +6679,10 @@ public class MainActivity extends AppCompatActivity {
                             t.setText(h);
                         }
                     }
-
                 }
                 catch (Exception ex){
                     t.setText("Invalid Input!!!");
                 }
-
             }
         });
 
@@ -6694,10 +6697,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
+    /*@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setContentView(R.layout.activity_main2);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+            setContentView(R.layout.activity_main);
+        }
+    }*/
 
 
-
+    /* in manifest         android:configChanges="orientation"   */
 
 }
